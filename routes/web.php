@@ -58,3 +58,27 @@ Route::any('multy2',function(){
 Route::get('user/member-center',['as'=>'center',function(){
     return 'aaaaaaa';
 }]);
+
+Route::get('/hello/laravelacademy',['as'=>'academy',function(){
+    return 'Hello LaravelAcademy！';
+}]);
+
+Route::get('/testNamedRoute',function(){
+    return redirect()->route('academy');
+});
+
+
+Route::get('member/info',['uses'=>'MemberController@info']);
+
+
+Route::any('test1',[
+   'uses'=>'StudentController@test1'
+]);
+
+Route::any('query1',[
+    'uses'=>'StudentController@query1'
+]);
+
+Route::any('orm1',[
+    'uses'=>'StudentController@orm1'
+]);
