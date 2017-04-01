@@ -82,3 +82,6 @@ Route::any('query1',[
 Route::any('orm1',[
     'uses'=>'StudentController@orm1'
 ]);
+
+//微信公众号路由
+Route::any('/wechat', 'WechatController@serve');
