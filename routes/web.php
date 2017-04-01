@@ -85,3 +85,4 @@ Route::any('orm1',[
 
 //微信公众号路由
 Route::any('/wechat', 'WechatController@serve');
+Route::any('/index', 'WechatController@index');

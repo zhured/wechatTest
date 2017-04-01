@@ -25,4 +25,10 @@ class WechatController extends Controller
 
         return $wechat->server->serve();
     }
+
+    public function index()
+    {
+        return "index test";
+
+    }
 }
