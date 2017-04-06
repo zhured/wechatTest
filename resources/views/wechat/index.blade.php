@@ -39,7 +39,7 @@ class wechat {
 
     public function responseMsg() {
         //---------- 接 收 数 据 ---------- //
-        $this->writeLog("$postStr:\n".$postStr);
+
         $postStr = file_get_contents("php://input");//$GLOBALS["HTTP_RAW_POST_DATA"]; //获取POST数据
         //用SimpleXML解析POST过来的XML数据
         $this->writeLog("$postStr:\n".$postStr);
