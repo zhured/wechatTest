@@ -1,10 +1,14 @@
 <?php
+
+
 define("TOKEN", "zhured"); //TOKEN值
 $wechatObj = new wechat();
-
+$wechatObj->writeLog("begint\n");
 if(isset($_GET["echostr"])){
+    $wechatObj->writeLog("valid\n");
     $wechatObj->valid();
 }else{
+    $wechatObj->writeLog("responseMsg\n");
     $wechatObj->responseMsg();
 }
 
@@ -35,8 +39,10 @@ class wechat {
 
     public function responseMsg() {
         //---------- 接 收 数 据 ---------- //
-        $postStr = file_get_contents("php:://input");//$GLOBALS["HTTP_RAW_POST_DATA"]; //获取POST数据
+        $this->writeLog("$postStr:\n".$postStr);
+        $postStr = file_get_contents("php://input");//$GLOBALS["HTTP_RAW_POST_DATA"]; //获取POST数据
         //用SimpleXML解析POST过来的XML数据
+        $this->writeLog("$postStr:\n".$postStr);
         if ($postStr!=null){
             $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
             $fromUsername = $postObj->FromUserName;
@@ -61,6 +67,12 @@ class wechat {
             echo "";
             exit;
         }
+    }
+
+    public function writeLog($log){
+        $myfile=fopen("testfile.txt","a");
+        fwrite($myfile,$log);
+        fclose($myfile);
     }
 }
 ?>
