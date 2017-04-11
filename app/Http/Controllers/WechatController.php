@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use EasyWeChat\Foundation\Application;
+use EasyWeChat\Support\Log;
+
 class WechatController extends Controller
 {
     //
@@ -13,23 +16,16 @@ class WechatController extends Controller
     public function serve()
     {
 
-        $signature = $_GET["signature"];
-        $timestamp = $_GET["timestamp"];
-        $nonce = $_GET["nonce"];
-        $token = "7f44ce087d33a3858521e086b5c53f17";
-        $echoStr = $_GET["echostr"];
-        $tmpArr = array($token, $timestamp, $nonce);
-        sort($tmpArr);
-        $tmpStr = implode( $tmpArr );
-        $tmpStr = sha1( $tmpStr );
-        if( $tmpStr == $signature && $echoStr ) {
-            echo $echoStr;
-            exit();
-        } else {
-            $this->responseMsg();
-        }
+        Log::info("request arrived");
 
+        $wechat =new Application(config('wechat'));
+        $wechat->server->setMessageHandler(function($message){
+           return "helllo  wollld";
+        });
 
+        Log::info('return response. ');
+
+        return $wechat->server->serve();
 
 
     }
@@ -37,7 +33,7 @@ class WechatController extends Controller
 
     public function index()
     {
-        return view('wechat/index');
+        return "hello";//view('wechat/index');
 
     }
 
